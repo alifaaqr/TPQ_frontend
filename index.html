@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login TPQ Website</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="login-bg">
+  <div class="login-card">
+    <h1>TPQ Website</h1>
+    <p>Silakan login sesuai peran Anda</p>
+
+    <form id="loginForm">
+      <input type="text" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <select id="role" required>
+        <option value="">Pilih Peran</option>
+        <option value="admin">Admin</option>
+        <option value="guru">Guru</option>
+        <option value="santri">Santri</option>
+      </select>
+      <button type="submit">Masuk</button>
+    </form>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
