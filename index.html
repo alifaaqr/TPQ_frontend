@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TPQ Website</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- navbar -->
+  <header>
+    <nav class="navbar">
+      <!-- Logo -->
+      <div class="logo">
+        <img src="gambar/LOGO.png" alt="Logo TPQ" class="logo-img" />
+        <span class="logo-text">TPQ Miftahul Jannah</span>
+      </div>
+
+      <!-- navigation menu  -->
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="tentangkami.html">Tentang Kami</a></li>
+          <li><a href="program.html">Program</a></li>
+          <li><a href="kontak.html">Kontak</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+
+        <!-- hamburger toggle -->
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- main content -->
+  <main>
+    <script src="script.js"></script>
+    <section class="content-center">
+      <!-- Text Section -->
+      <div class="text-section">
+        <h1>TPQ <span>WEBSITE</span></h1>
+        <button class="cta-button" onclick="window.location.href='login.html'">
+          WWW.TPQWEBSITE.COM
+        </button>
+      </div>
+
+      <!-- Image Section -->
+      <div class="image-section">
+        <div class="preview-box">
+          <img src="gambar/ngaji_kelas..png" alt="Gambar Ngaji" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Functional Section -->
+  <script>
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.querySelector(".nav-links");
+
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+  </script>
+
+</body>
+</html>
