@@ -1,35 +1,26 @@
-document.getElementById("loginForm").addEventListener("submit", function(e) {
-  e.preventDefault();
+window.addEventListener("load", () => {
+  document.body.classList.add("loaded");
+});
 
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
-  const role = document.getElementById("role").value;
+// Upload gambar orang ngaji
+const imageUpload = document.getElementById("imageUpload");
+const previewBox = document.getElementById("previewBox");
 
-  if (role === "admin") {
-    if (email === "admin@tpq.com" && password === "admin123") {
-      alert("Login berhasil sebagai Admin!");
-      window.location.href = "admin-dashboard.html";
-    } else {
-      alert("Email atau password admin salah!");
-    }
-  } 
-  else if (role === "guru") {
-    if (email === "guru@tpq.com" && password === "guru123") {
-      alert("Login berhasil sebagai Guru!");
-      window.location.href = "guru-dashboard.html";
-    } else {
-      alert("Email atau password guru salah!");
-    }
-  } 
-  else if (role === "santri") {
-    if (email === "santri@tpq.com" && password === "santri123") {
-      alert("Login berhasil sebagai Santri!");
-      window.location.href = "santri-dashboard.html";
-    } else {
-      alert("Email atau password santri salah!");
-    }
-  } 
-  else {
-    alert("Silakan pilih peran terlebih dahulu!");
+imageUpload.addEventListener("change", (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      previewBox.innerHTML = `<img src="${reader.result}" alt="Gambar Ngaji" />`;
+    };
+    reader.readAsDataURL(file);
   }
+});
+
+// Hamburger menu untuk tampilan mobile
+const hamburger = document.getElementById("hamburger");
+const navLinks = document.querySelector(".nav-links");
+
+hamburger.addEventListener("click", () => {
+  navLinks.classList.toggle("active");
 });

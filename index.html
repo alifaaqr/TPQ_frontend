@@ -3,29 +3,70 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Login TPQ Website</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <title>TPQ Website</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
+<body>
 
-<body class="login-bg">
-  <div class="login-card">
-    <h1>TPQ Website</h1>
-    <p>Silakan login sesuai peran Anda</p>
+  <!-- ===== HEADER / NAVBAR ===== -->
+  <header>
+    <nav class="navbar">
+      <!-- Logo -->
+      <div class="logo">
+        <img src="gambar/LOGO.png" alt="Logo TPQ" class="logo-img" />
+        <span class="logo-text">TPQ Miftahul Jannah</span>
+      </div>
 
-    <form id="loginForm">
-      <input type="text" id="email" placeholder="Email" required>
-      <input type="password" id="password" placeholder="Password" required>
-      <select id="role" required>
-        <option value="">Pilih Peran</option>
-        <option value="admin">Admin</option>
-        <option value="guru">Guru</option>
-        <option value="santri">Santri</option>
-      </select>
-      <button type="submit">Masuk</button>
-    </form>
-  </div>
+      <!-- Menu Navigasi -->
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="tentangkami.html">Tentang Kami</a></li>
+          <li><a href="program.html">Program</a></li>
+          <li><a href="kontak.html">Kontak</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
 
-  <script src="script.js"></script>
+        <!-- Tombol Hamburger (Mobile) -->
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main>
+    <script src="script.js"></script>
+    <section class="content-center">
+      <!-- Bagian Teks -->
+      <div class="text-section">
+        <h1>TPQ <span>WEBSITE</span></h1>
+        <button class="cta-button" onclick="window.location.href='login.html'">
+          WWW.TPQWEBSITE.COM
+        </button>
+      </div>
+
+      <!-- Bagian Gambar -->
+      <div class="image-section">
+        <div class="preview-box">
+          <img src="gambar/ngaji_kelas..png" alt="Gambar Ngaji" />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== SCRIPT ===== -->
+  <script>
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.querySelector(".nav-links");
+
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+  </script>
+
 </body>
 </html>
