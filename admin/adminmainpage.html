@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Admin - TPQ Miftahul Jannah</title>
+  <link rel="stylesheet" href="adminpagestyle.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="../gambar/LOGO.png" alt="Logo TPQ" class="logo-img" />
+        <span class="logo-text">TPQ Miftahul Jannah</span>
+      </div>
+
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="tentangkami.html">Tentang Kami</a></li>
+          <li><a href="program.html">Program</a></li>
+          <li><a href="kontak.html">Kontak</a></li>
+          <li><a href="admin.html" class="active">Admin</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Admin Dashboard -->
+  <main>
+    <section class="content-section">
+      <div class="content-header">
+        <h2>Dashboard Admin</h2>
+        <h1>Data Santri, Pengajar & Rekap Kehadiran</h1>
+      </div>
+
+      <div class="content-container">
+        <!-- Data Santri -->
+        <div class="content-card">
+          <div class="card-title">Data Santri</div>
+          <div class="card-desc">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Nama</th>
+                  <th>Kelas</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Ahmad Fauzi</td>
+                  <td>Iqra 3</td>
+                  <td>Hadir</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Siti Rahma</td>
+                  <td>Al-Qur’an 1</td>
+                  <td>Izin</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>Muhammad Rafi</td>
+                  <td>Iqra 4</td>
+                  <td>Hadir</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Data Pengajar -->
+        <div class="content-card">
+          <div class="card-title">Data Pengajar</div>
+          <div class="card-desc">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Nama Pengajar</th>
+                  <th>Kelas</th>
+                  <th>Kehadiran</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Ustadzah Maryam</td>
+                  <td>Iqra 3</td>
+                  <td>Hadir</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Ustadz Ahmad</td>
+                  <td>Al-Qur’an 1</td>
+                  <td>Hadir</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Rekap Kehadiran Hari Ini -->
+        <div class="content-card">
+          <div class="card-title">Rekap Kehadiran Hari Ini</div>
+          <div class="card-desc">
+            <p><strong>Total Santri:</strong> 32</p>
+            <p><strong>Hadir:</strong> 29</p>
+            <p><strong>Izin:</strong> 2</p>
+            <p><strong>Alfa:</strong> 1</p>
+            <hr style="margin:15px 0; border-color:rgba(255,255,255,0.2);">
+            <p><strong>Persentase Kehadiran:</strong> 90.6%</p>
+          </div>
+          <button class="submit-btn" onclick="refreshRekap()">Perbarui Rekap</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 TPQ Miftahul Jannah | Dashboard Admin</p>
+  </footer>
+
+  <!-- Script -->
+  <script>
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.querySelector(".nav-links");
+    hamburger.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+
+    function refreshRekap() {
+      alert("Rekap kehadiran berhasil diperbarui!");
+    }
+  </script>
+
+</body>
+</html>

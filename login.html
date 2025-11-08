@@ -35,7 +35,7 @@
     <div class="login-box">
       <h2 class="login-title">Login Admin / Pengajar</h2>
 
-      <form>
+      <form id="loginForm">
         <div class="input-group">
           <label for="username">Username</label>
           <input type="text" id="username" placeholder="Masukkan username" required />
@@ -53,14 +53,45 @@
         <a href="lupapassword.html">Lupa password?</a>
         <a href="register.html">Daftar akun baru</a>
       </div>
+
+      <p id="loginMessage" style="color:#ffdfdf; margin-top:10px;"></p>
     </div>
   </main>
 
   <!-- functional section -->
   <script>
+    // Responsive navbar
     document.getElementById('hamburger').addEventListener('click', () => {
       document.querySelector('.nav-links').classList.toggle('active');
       document.querySelector('.hamburger').classList.toggle('active');
+    });
+
+    // Login logic
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const message = document.getElementById('loginMessage');
+
+      // akun contoh (sementara hardcoded)
+      const adminAccount = { username: "admin", password: "12345" };
+      const pengajarAccount = { username: "pengajar", password: "12345" };
+
+      if (username === adminAccount.username && password === adminAccount.password) {
+        message.style.color = "#b6ffb6";
+        message.textContent = "Login berhasil! Mengarahkan ke dashboard admin...";
+        setTimeout(() => window.location.href = "adminmainpage.html", 1000);
+      } 
+      else if (username === pengajarAccount.username && password === pengajarAccount.password) {
+        message.style.color = "#b6ffb6";
+        message.textContent = "Login berhasil! Mengarahkan ke halaman pengajar...";
+        setTimeout(() => window.location.href = "pengajar.html", 1000);
+      } 
+      else {
+        message.style.color = "#ffb6b6";
+        message.textContent = "Username atau password salah!";
+      }
     });
   </script>
 </body>
