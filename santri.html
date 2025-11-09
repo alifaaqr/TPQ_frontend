@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Santri - TPQ Miftahul Jannah</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header>
+      <nav class="navbar">
+        <div class="logo">
+          <img src="gambar/LOGO.png" alt="Logo TPQ" class="logo-img" />
+          <span class="logo-text">TPQ Miftahul Jannah</span>
+        </div>
+
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="program.html">Program</a></li>
+          <li><a href="kontak.html">Kontak</a></li>
+          <li><a href="dashboard.html" class="active"></a></li>
+          <li><a href="login.html">Logout</a></li>
+        </ul>
+
+        <div class="hamburger" id="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Dashboard -->
+    <main class="content-section">
+      <div class="content-header">
+        <h2>Selamat Datang, Santri</h2>
+        <h1>TPQ Miftahul Jannah</h1>
+      </div>
+
+      <div class="content-container">
+        <div class="content-card">
+          <span class="card-title">Profil Santri</span>
+          <p class="card-desc">
+            Lihat dan ubah data pribadi Anda seperti nama, kelas, dan wali
+            santri. Pastikan informasi selalu terbaru.
+          </p>
+          <button
+            class="program-btn"
+            onclick="window.location.href='profil.html'"
+          >
+            Lihat Profil
+          </button>
+        </div>
+
+        <div class="content-card">
+          <span class="card-title">Nilai dan Hafalan</span>
+          <p class="card-desc">
+            Cek catatan nilai ujian, hafalan juz, serta progres pembelajaran.
+            Diperbarui secara berkala oleh pengajar.
+          </p>
+          <button
+            class="program-btn"
+            onclick="window.location.href='nilai.html'"
+          >
+            Lihat Nilai
+          </button>
+        </div>
+
+        <div class="content-card">
+          <span class="card-title">Jadwal Kegiatan</span>
+          <p class="card-desc">
+            Pantau jadwal harian dan acara TPQ, mulai dari pengajian rutin
+            hingga lomba hafalan Al-Qur’an.
+          </p>
+          <button
+            class="program-btn"
+            onclick="window.location.href='jadwal.html'"
+          >
+            Lihat Jadwal
+          </button>
+        </div>
+
+        <div class="content-card">
+          <span class="card-title">Pesan & Pengumuman</span>
+          <p class="card-desc">
+            Terima pesan dari pengajar dan baca pengumuman penting TPQ, agar
+            tidak ketinggalan informasi terbaru.
+          </p>
+          <button
+            class="program-btn"
+            onclick="window.location.href='pengumuman.html'"
+          >
+            Buka Pesan
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Script -->
+    <script>
+      const hamburger = document.getElementById("hamburger");
+      const navLinks = document.querySelector(".nav-links");
+      hamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+      });
+    </script>
+  </body>
+</html>
