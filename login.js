@@ -67,54 +67,45 @@ form.addEventListener("submit", async (e) => {
 });
 c*/
 // handler untuk login (email dan password)
-const loginForm = document.getElementById("loginForm")
-if (loginForm) { 
-  loginForm.addEventListener("submit", async (e)=> { 
-    e.preventDefault(); 
+// login.js
+const loginForm = document.getElementById("loginForm");
+
+if (loginForm) {
+  loginForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
+    const role = document.getElementById("role").value;
 
-    if (!email || !password) {
+    if (!email || !password || !role) {
       alert("Isi semua kolom login!");
       return;
     }
 
     try {
-      const response = await fetch("http://localhost:3000/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
       });
 
-    const result  = await response.json(); 
-    
+      if (error) throw error;
 
-    if (!response.ok) { 
-      alert(result.message || "Login Gagal. Periksa kembali email dan password.")
-      return; 
-    }
+      alert(`Selamat datang, ${data.user.email}!`);
+      localStorage.setItem("user", JSON.stringify(data.user));
 
-
-    alert(`Selamat datang, ${result.user.fullname}!`)
-     localStorage.setItem("user", JSON.stringify(result.user));
-
-     const role = document.getElementById("role").value; 
-
-     if (role === "admin") { 
-      window.location.href = "admin/admin.html"; 
-     }
-     else if (role === "pengajar") { 
-      window.location.href = "pengajar/pengajar.html";
-     }
-     else if (role === "santri") { 
-      window.location.href = "santri/santri.html"
-     }else { 
-      window.location.href = "index.html"; 
-     }
+      if (role === "admin") {
+        window.location.href = "admin/admin.html";
+      } else if (role === "pengajar") {
+        window.location.href = "pengajar/pengajar.html";
+      } else if (role === "santri") {
+        window.location.href = "santri/santri.html";
+      } else {
+        window.location.href = "index.html";
+      }
     } catch (err) {
       console.error("Error:", err);
-      alert("Gagal menghubungi server.");
+      alert("Login gagal: " + err.message);
     }
   });
 }
