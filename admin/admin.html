@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Admin - TPQ Miftahul Jannah</title>
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="../gambar/LOGO.png" alt="Logo TPQ" />
+        <span class="logo-text">TPQ Miftahul Jannah</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tentangkami.html">Tentang Kami</a></li>
+        <li><a href="program.html">Program</a></li>
+        <li><a href="kontak.html">Kontak</a></li>
+        <li><a href="admin.html" class="active">Admin</a></li>
+      </ul>
+    </header>
+
+    <main class="dashboard-container">
+      <h2 class="dashboard-title">
+        Dashboard Admin<br />Data Santri, Pengajar & Rekap Kehadiran
+      </h2>
+
+      <div class="dashboard-grid">
+        <!-- Data Santri -->
+        <div class="card">
+          <h3>Data Santri</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Kelas</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="santriTable">
+              <tr>
+                <td>1</td>
+                <td>Ahmad Fauzi</td>
+                <td>Iqra 3</td>
+                <td>Hadir</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Siti Rahma</td>
+                <td>Al-Qur’an 1</td>
+                <td>Izin</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Muhammad Rafi</td>
+                <td>Iqra 4</td>
+                <td>Hadir</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Data Pengajar -->
+        <div class="card">
+          <h3>Data Pengajar</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nama Pengajar</th>
+                <th>Kelas</th>
+                <th>Kehadiran</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Ustadzah Maryam</td>
+                <td>Iqra 3</td>
+                <td>Hadir</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Ustadz Ahmad</td>
+                <td>Al-Qur’an 1</td>
+                <td>Hadir</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Rekap Kehadiran -->
+        <div class="card rekap">
+          <h3>Rekap Kehadiran Hari Ini</h3>
+          <p>Total Santri: <strong>32</strong></p>
+          <p>Hadir: <strong>29</strong></p>
+          <p>Izin: <strong>2</strong></p>
+          <p>Alfa: <strong>1</strong></p>
+          <hr />
+          <p>Persentase Kehadiran: <strong>90.6%</strong></p>
+          <button class="button-refresh">Perbarui Rekap</button>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
