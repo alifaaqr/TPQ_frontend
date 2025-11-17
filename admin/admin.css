@@ -64,7 +64,9 @@
   
   /* ===== DASHBOARD CONTENT ===== */
   .dashboard-container {
-    padding: 40px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px 20px;       /* kurangi padding biar tidak nyekik grid */
   }
   
   .dashboard-title {
@@ -79,7 +81,7 @@
   /* ===== GRID ===== */
   .dashboard-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
   }
   
@@ -90,8 +92,22 @@
     padding: 20px;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
     transition: transform 0.2s, box-shadow 0.2s;
+    min-width: 260px;
+  }
+
+/* Backup mode kalau viewport makin kecil */
+  @media (max-width: 768px) {
+  .dashboard-container {
+    padding: 15px;
+  }
   }
   
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+
   .card:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
