@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Admin - TPQ Miftahul Jannah</title>
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="../gambar/LOGO.png" alt="Logo TPQ" />
+        <span class="logo-text">TPQ Miftahul Jannah</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="tentangkami.html">Tentang Kami</a></li>
+        <li><a href="program.html">Program</a></li>
+        <li><a href="kontak.html">Kontak</a></li>
+        <li><a href="admin.html" class="active">Admin</a></li>
+      </ul>
+    </header>
+
+    <main class="dashboard-container">
+      <h2 class="dashboard-title">
+        Dashboard Admin<br />Data Santri, Pengajar & Rekap Kehadiran
+      </h2>
+
+      <div class="dashboard-grid">
+        <!-- Data Santri -->
+        <div class="card">
+          <h3>Data Santri</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Kartu UID</th>
+                <th>Status</th>
+                <th>Waktu</th>
+              </tr>
+            </thead>
+            <tbody id="santriTable">
+              <tr><td colspan="5">Memuat data...</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Data Pengajar -->
+        <div class="card">
+          <h3>Data Pengajar</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nama Pengajar</th>
+                <th>Kelas</th>
+                <th>Kehadiran</th>
+              </tr>
+            </thead>
+            <tbody id="pengajarTable">
+              <tr><td colspan="4">Belum dihubungkan ke Supabase</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Rekap Kehadiran -->
+        <div class="card rekap">
+          <h3>Rekap Kehadiran Hari Ini</h3>
+          <p>Total Santri: <strong id="totalSantri">0</strong></p>
+          <p>Hadir: <strong id="hadirCount">0</strong></p>
+          <p>Izin: <strong id="izinCount">0</strong></p>
+          <p>Alfa: <strong id="alfaCount">0</strong></p>
+          <hr />
+          <p>Persentase Kehadiran: <strong id="persentase">0%</strong></p>
+          <button class="button-refresh" id="refreshBtn">Perbarui Rekap</button>
+        </div>
+      </div>
+    </main>
+
+    <script type="module">
+      import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+      // TODO: ubah sesuai project kamu
+      const SUPABASE_URL = "https://sqvhzvhakivoeqajxowh.supabase.co";
+      const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNxdmh6dmhha2l2b2VxYWp4b3doIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjA5NTMzNTIsImV4cCI6MjA3NjUyOTM1Mn0.QiDgEH7djJO1-AKQeoeLKw4W8FjeudS77NPZJCHIlfs";
+      const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+
+      const santriTable = document.getElementById("santriTable");
+      const totalSantri = document.getElementById("totalSantri");
+      const hadirCount = document.getElementById("hadirCount");
+      const izinCount = document.getElementById("izinCount");
+      const alfaCount = document.getElementById("alfaCount");
+      const persentase = document.getElementById("persentase");
+      const refreshBtn = document.getElementById("refreshBtn");
+
+      async function loadData() {
+        santriTable.innerHTML = "<tr><td colspan='5'>Memuat...</td></tr>";
+
+        const { data, error } = await supabase
+          .from("vw_activity_with_user")
+          .select("*")
+          .order("created_at", { ascending: false })
+          .limit(50);
+
+        if (error) {
+          santriTable.innerHTML =
+            "<tr><td colspan='5'>Gagal memuat data: " + error.message + "</td></tr>";
+          return;
+        }
+
+        if (!data || data.length === 0) {
+          santriTable.innerHTML = "<tr><td colspan='5'>Belum ada presensi.</td></tr>";
+          return;
+        }
+
+        let hadir = 0, izin = 0, alfa = 0;
+        santriTable.innerHTML = "";
+
+        data.forEach((log, i) => {
+          const nama = log.fullname || "(Unknown)";
+          const status = log.status || "-";
+          const waktu = new Date(log.created_at).toLocaleString("id-ID");
+          if (status.toLowerCase().includes("sukses") || status.toLowerCase().includes("hadir")) hadir++;
+          else if (status.toLowerCase().includes("izin")) izin++;
+          else alfa++;
+
+          const row = document.createElement("tr");
+          if (nama === "(Unknown)") row.classList.add("unknown");
+          row.innerHTML = `
+            <td>${i + 1}</td>
+            <td>${nama}</td>
+            <td>${log.card_uid}</td>
+            <td>${status}</td>
+            <td>${waktu}</td>
+          `;
+          santriTable.appendChild(row);
+        });
+
+        const total = hadir + izin + alfa;
+        totalSantri.textContent = total;
+        hadirCount.textContent = hadir;
+        izinCount.textContent = izin;
+        alfaCount.textContent = alfa;
+        persentase.textContent =
+          total === 0 ? "0%" : ((hadir / total) * 100).toFixed(1) + "%";
+      }
+
+      refreshBtn.addEventListener("click", loadData);
+      loadData();
+      setInterval(loadData, 10000);
+    </script>
+  </body>
+</html>

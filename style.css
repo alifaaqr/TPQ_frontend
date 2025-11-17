@@ -435,8 +435,7 @@ body.loaded {
 }
 
 .kontak-header p {
-  color: #e6ffe7;
-  font-size: 1.1rem;
+  color: #e6ffe7;  font-size: 1.1rem;
 }
 
 .gradien-text {
@@ -445,9 +444,8 @@ body.loaded {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-/* ===== RESET test ===== */
-* {
-  margin: 0;
+/* ===== RESET test  ===== */
+* {  margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
