@@ -25,58 +25,17 @@ hamburger.addEventListener("click", () => {
   navLinks.classList.toggle("active");
 }); */
 
-//handler untuk  register.html
-/*
-const form = document.getElementById("signupForm");
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+const loginForm = document.getElementById("loginForm");
 
-  const fullname = document.getElementById("fullname").value.trim();
-  const username = document.getElementById("username").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
-  const confirmPassword = document.getElementById("confirmPassword").value;
-
-  // Validasi sederhana
-  if (password !== confirmPassword) {
-    alert("Password dan konfirmasi tidak sama!");
-    return;
-  }
-
-  if (!fullname || !username || !email || !password) {
-    alert("Semua kolom harus diisi.");
-    return;
-  }
-
-  const response = await fetch("http://localhost:3000/signup", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ fullname, username, email, password }),
-  });
-
-  const result = await response.json();
-
-  if (response.ok) {
-    alert("Registrasi sukses! Anda akan diarahkan ke halaman login.");
-    setTimeout(() => {
-      window.location.href = "login.html";
-    }, 1000); // jeda 1 detik sebelum pindah
-  } else {
-    alert(result.message || "Terjadi kesalahan!");
-  }
-});
-c*/
-// handler untuk login (email dan password)
-const loginForm = document.getElementById("loginForm")
-if (loginForm) { 
-  loginForm.addEventListener("submit", async (e)=> { 
-    e.preventDefault(); 
+if (loginForm) {
+  loginForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
 
     if (!email || !password) {
-      alert("Isi semua kolom login!");
+      alert("Email dan password harus diisi.");
       return;
     }
 
@@ -87,33 +46,37 @@ if (loginForm) {
         body: JSON.stringify({ email, password }),
       });
 
-    const result  = await response.json(); 
-    
+      const result = await response.json();
 
-    if (!response.ok) { 
-      alert(result.message || "Login Gagal. Periksa kembali email dan password.")
-      return; 
-    }
+      if (!response.ok) {
+        alert(result.message || "Login gagal.");
+        return;
+      }
 
+      const user = result.user;
 
-    alert(`Selamat datang, ${result.user.fullname}!`)
-     localStorage.setItem("user", JSON.stringify(result.user));
+      // Simpan sesi
+      localStorage.setItem("user", JSON.stringify(user));
 
-     const role = document.getElementById("role").value; 
+      // Cek role untuk redirect
+      if (user.role_id === 2) {
+        window.location.href = "santri/santri.html";
+      } 
+      else if (user.role_id === 3) {
+        window.location.href = "pengajar/pengajar.html";
+      } 
+      else if (user.role_id === 1) {
+        alert("Admin tidak login dari halaman ini.");
+        localStorage.removeItem("user");
+        return;
+      } 
+      else {
+        alert("Role tidak dikenali.");
+        localStorage.removeItem("user");
+      }
 
-     if (role === "admin") { 
-      window.location.href = "admin/admin.html"; 
-     }
-     else if (role === "pengajar") { 
-      window.location.href = "pengajar/pengajar.html";
-     }
-     else if (role === "santri") { 
-      window.location.href = "santri/santri.html"
-     }else { 
-      window.location.href = "index.html"; 
-     }
     } catch (err) {
-      console.error("Error:", err);
+      console.error(err);
       alert("Gagal menghubungi server.");
     }
   });
